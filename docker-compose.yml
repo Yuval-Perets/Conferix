@@ -1,0 +1,24 @@
+services:
+ backend:
+  build: ./ConferixBack
+  container_name: conferix_backend
+  ports:
+   - "3000:3000"
+  environment:
+   - MONGO_URI=mongodb://mongo:27017/conferix
+  depends_on:
+   - mongo
+
+ frontend:
+  build: ./ConferixFront
+  container_name: conferix_frontend
+  ports:
+   - "8080:80"
+ mongo:
+  image: mongo:6.0
+  container_name: mongo
+  restart: always
+  ports:
+   - "27017:27017"
+volumes:
+ mongo_data:
